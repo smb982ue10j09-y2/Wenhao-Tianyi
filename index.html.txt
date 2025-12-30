@@ -1,0 +1,2938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroDetect | Revolutionizing Parkinson's Early Screening</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361EE;
+            --primary-light: #4895EF;
+            --primary-dark: #3A0CA3;
+            --secondary: #7209B7;
+            --accent: #F72585;
+            --success: #4CC9F0;
+            --warning: #F9C74F;
+            --dark: #1E1E2E;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+            --gray-light: #E9ECEF;
+            --white: #FFFFFF;
+            --gradient-primary: linear-gradient(135deg, #4361EE, #7209B7);
+            --gradient-secondary: linear-gradient(135deg, #4CC9F0, #4895EF);
+            --gradient-accent: linear-gradient(135deg, #F72585, #FF6B6B);
+            --gradient-warning: linear-gradient(135deg, #F9C74F, #F8961E);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.7;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Enhanced Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+        
+        .floating-element-1 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+        
+        .floating-element-2 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+            top: 70%;
+            left: 85%;
+            animation-delay: 5s;
+            animation-duration: 25s;
+        }
+        
+        .floating-element-3 {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--success) 0%, transparent 70%);
+            top: 30%;
+            left: 90%;
+            animation-delay: 10s;
+            animation-duration: 30s;
+        }
+        
+        .floating-element-4 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: 85%;
+            left: 15%;
+            animation-delay: 15s;
+            animation-duration: 18s;
+        }
+        
+        .floating-element-5 {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, var(--warning) 0%, transparent 70%);
+            top: 20%;
+            left: 75%;
+            animation-delay: 7s;
+            animation-duration: 22s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translate(40px, 0) rotate(180deg) scale(1);
+            }
+            75% {
+                transform: translate(20px, 20px) rotate(270deg) scale(0.9);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg) scale(1);
+            }
+        }
+        
+        /* Data Flow Animation */
+        .data-flow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .data-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.2;
+            animation: dataFlow 8s infinite linear;
+        }
+        
+        @keyframes dataFlow {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* New Molecular Animation */
+        .molecular-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .molecule {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: moleculeFloat 25s infinite linear;
+        }
+        
+        .atom {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.2;
+        }
+        
+        .bond {
+            position: absolute;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.15;
+            transform-origin: left center;
+        }
+        
+        @keyframes moleculeFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, 50px) rotate(360deg);
+            }
+        }
+        
+        /* New Particle Animation */
+        .particle-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--success);
+            opacity: 0.1;
+            animation: particleMove 20s infinite linear;
+        }
+        
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(30px, -20px);
+            }
+            50% {
+                transform: translate(60px, 0);
+            }
+            75% {
+                transform: translate(30px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        /* Enhanced Logo Design - UPDATED WITH NEW ILLUSTRATION */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: logoPulse 5s infinite ease-in-out;
+        }
+        
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 35px rgba(67, 97, 238, 0.4);
+            }
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .logo:hover .logo-icon::before {
+            animation: shine 1.5s ease;
+        }
+        
+        /* Updated Logo Icon Inner Structure */
+        .logo-icon-inner {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* DNA双螺旋结构 */
+        .logo-dna-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: dnaFloat 8s infinite ease-in-out;
+        }
+        
+        .logo-dna-strand {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-dna-strand.second {
+            transform: rotateY(180deg);
+        }
+        
+        .dna-node {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 设置DNA节点位置 */
+        .logo-dna-strand .dna-node:nth-child(1) { top: 15%; left: 20%; }
+        .logo-dna-strand .dna-node:nth-child(2) { top: 25%; left: 80%; }
+        .logo-dna-strand .dna-node:nth-child(3) { top: 40%; left: 20%; }
+        .logo-dna-strand .dna-node:nth-child(4) { top: 55%; left: 80%; }
+        .logo-dna-strand .dna-node:nth-child(5) { top: 70%; left: 20%; }
+        .logo-dna-strand .dna-node:nth-child(6) { top: 85%; left: 80%; }
+        
+        .logo-dna-strand.second .dna-node:nth-child(1) { top: 15%; left: 80%; }
+        .logo-dna-strand.second .dna-node:nth-child(2) { top: 25%; left: 20%; }
+        .logo-dna-strand.second .dna-node:nth-child(3) { top: 40%; left: 80%; }
+        .logo-dna-strand.second .dna-node:nth-child(4) { top: 55%; left: 20%; }
+        .logo-dna-strand.second .dna-node:nth-child(5) { top: 70%; left: 80%; }
+        .logo-dna-strand.second .dna-node:nth-child(6) { top: 85%; left: 20%; }
+        
+        .dna-connector {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+            left: 50%;
+            transform: translateX(-50%);
+            animation: connectorPulse 4s infinite;
+        }
+        
+        @keyframes dnaFloat {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        @keyframes connectorPulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        
+        /* 神经网络元素 */
+        .logo-neural-network {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            animation: neuralFloat 12s infinite ease-in-out;
+        }
+        
+        .neural-node {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        }
+        
+        .neural-node:nth-child(1) { top: 20%; left: 50%; }
+        .neural-node:nth-child(2) { top: 50%; left: 20%; }
+        .neural-node:nth-child(3) { top: 50%; left: 80%; }
+        .neural-node:nth-child(4) { top: 80%; left: 50%; }
+        
+        .neural-connection {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            height: 2px;
+            border-radius: 1px;
+        }
+        
+        .neural-connection:nth-child(5) {
+            width: 40%;
+            top: 35%;
+            left: 30%;
+            transform: rotate(45deg);
+            animation: connectionPulse1 3s infinite;
+        }
+        
+        .neural-connection:nth-child(6) {
+            width: 40%;
+            top: 35%;
+            left: 30%;
+            transform: rotate(-45deg);
+            animation: connectionPulse2 3s infinite 0.5s;
+        }
+        
+        .neural-connection:nth-child(7) {
+            width: 40%;
+            top: 65%;
+            left: 30%;
+            transform: rotate(45deg);
+            animation: connectionPulse1 3s infinite 1s;
+        }
+        
+        @keyframes neuralFloat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes connectionPulse1 {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+        
+        @keyframes connectionPulse2 {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+        
+        /* 医疗盾牌元素 */
+        .logo-shield {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            animation: shieldPulse 6s infinite ease-in-out;
+        }
+        
+        .shield-outer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+        
+        .shield-inner {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+        
+        .shield-cross {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+        }
+        
+        .shield-cross::before,
+        .shield-cross::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .shield-cross::before {
+            width: 100%;
+            height: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: crossPulse1 4s infinite;
+        }
+        
+        .shield-cross::after {
+            width: 4px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: crossPulse2 4s infinite 0.5s;
+        }
+        
+        @keyframes shieldPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes crossPulse1 {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes crossPulse2 {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(67, 97, 238, 0.1);
+            position: relative;
+        }
+        
+        /* 移除了logo-text::after样式，这是之前添加AI的地方 */
+        
+        .logo-tagline {
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 500;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 30px rgba(67, 97, 238, 0.1);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.15);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            animation: navUnderline 0.5s ease-out;
+        }
+        
+        @keyframes navUnderline {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        
+        .nav-cta {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(247, 37, 133, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .nav-cta:hover::before {
+            animation: shine 1.5s ease;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(247, 37, 133, 0.4);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 26px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><path fill="%234361EE" fill-opacity="0.03" d="M300,0C134.3,0,0,134.3,0,300s134.3,300,300,300s300-134.3,300-300S465.7,0,300,0z M300,500c-110.5,0-200-89.5-200-200S189.5,100,300,100s200,89.5,200,200S410.5,500,300,500z"/></svg>');
+            background-size: 600px;
+            z-index: 1;
+            animation: bgPulse 20s infinite alternate;
+        }
+        
+        @keyframes bgPulse {
+            0% {
+                opacity: 0.03;
+            }
+            100% {
+                opacity: 0.07;
+            }
+        }
+        
+        .hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 20px rgba(67, 97, 238, 0.2);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(67, 97, 238, 0.4);
+            }
+            100% {
+                box-shadow: 0 8px 20px rgba(67, 97, 238, 0.2);
+            }
+        }
+        
+        .hero-badge i {
+            margin-right: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 58px;
+            margin-bottom: 25px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 650px;
+            font-weight: 500;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            margin-bottom: 45px;
+            color: var(--dark);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            min-width: 140px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .stat-value {
+            font-size: 42px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 20px 42px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .btn-primary:hover::after {
+            animation: shine 1.5s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 20px 42px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: var(--gradient-primary);
+            border-radius: 50px;
+            z-index: -1;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.2);
+        }
+        
+        /* Metrics Section */
+        .metrics-section {
+            padding: 120px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .metrics-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="%234CC9F0" stroke-width="1" stroke-opacity="0.05"/><circle cx="100" cy="100" r="60" fill="none" stroke="%234361EE" stroke-width="1" stroke-opacity="0.05"/><circle cx="100" cy="100" r="40" fill="none" stroke="%237209B7" stroke-width="1" stroke-opacity="0.05"/></svg>');
+            background-size: 200px;
+            z-index: 0;
+            animation: bgMove 30s infinite linear;
+        }
+        
+        @keyframes bgMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 200px 200px;
+            }
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-subtitle {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .section-description {
+            color: var(--gray);
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 45px 35px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloat 6s infinite ease-in-out;
+            animation-play-state: paused;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            animation-play-state: running;
+        }
+        
+        @keyframes cardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+        
+        .metric-card:nth-child(2)::before {
+            background: var(--gradient-secondary);
+        }
+        
+        .metric-card:nth-child(3)::before {
+            background: var(--gradient-accent);
+        }
+        
+        .metric-card:nth-child(4)::before {
+            background: var(--gradient-warning);
+        }
+        
+        .metric-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 36px;
+            color: white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: iconFloat 4s infinite ease-in-out;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .metric-card:nth-child(1) .metric-icon {
+            background: var(--gradient-primary);
+        }
+        
+        .metric-card:nth-child(2) .metric-icon {
+            background: var(--gradient-secondary);
+        }
+        
+        .metric-card:nth-child(3) .metric-icon {
+            background: var(--gradient-accent);
+        }
+        
+        .metric-card:nth-child(4) .metric-icon {
+            background: var(--gradient-warning);
+        }
+        
+        .metric-value {
+            font-size: 48px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        .metric-card:nth-child(1) .metric-value {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .metric-card:nth-child(2) .metric-value {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .metric-card:nth-child(3) .metric-value {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .metric-card:nth-child(4) .metric-value {
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .metric-label {
+            color: var(--gray);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        /* Product Section */
+        .product-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+            position: relative;
+        }
+        
+        .product-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        
+        .product-visual {
+            flex: 1;
+            position: relative;
+        }
+        
+        .product-visual-main {
+            width: 100%;
+            height: 450px;
+            background: var(--gradient-primary);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(67, 97, 238, 0.25);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+            animation: floatProduct 6s infinite ease-in-out;
+        }
+        
+        @keyframes floatProduct {
+            0%, 100% {
+                transform: perspective(1000px) rotateY(-5deg) translateY(0);
+            }
+            50% {
+                transform: perspective(1000px) rotateY(-5deg) translateY(-10px);
+            }
+        }
+        
+        .product-visual-main:hover {
+            animation-play-state: paused;
+            transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+        }
+        
+        .product-visual-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><path fill="%23FFFFFF" fill-opacity="0.1" d="M150,0C67.2,0,0,67.2,0,150s67.2,150,150,150s150-67.2,150-150S232.8,0,150,0z M150,250c-55.2,0-100-44.8-100-100S94.8,50,150,50s100,44.8,100,100S205.2,250,150,250z"/></svg>');
+            background-size: 300px;
+        }
+        
+        .product-visual-element {
+            width: 320px;
+            height: 320px;
+            background: white;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            animation: productElement 8s infinite ease-in-out;
+        }
+        
+        @keyframes productElement {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(1deg);
+            }
+            75% {
+                transform: rotate(-1deg);
+            }
+        }
+        
+        .product-visual-icon {
+            font-size: 80px;
+            margin-bottom: 25px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconPulse 3s infinite;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .product-visual-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .product-visual-subtitle {
+            color: var(--gray);
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .product-info {
+            flex: 1;
+        }
+        
+        .product-info h2 {
+            font-size: 42px;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+        
+        .product-info p {
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .product-features {
+            margin-top: 45px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            padding: 25px;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            flex-shrink: 0;
+            font-size: 28px;
+            color: white;
+            animation: featureIcon 5s infinite ease-in-out;
+        }
+        
+        @keyframes featureIcon {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(5deg);
+            }
+            75% {
+                transform: rotate(-5deg);
+            }
+        }
+        
+        .feature-item:nth-child(1) .feature-icon {
+            background: var(--gradient-primary);
+        }
+        
+        .feature-item:nth-child(2) .feature-icon {
+            background: var(--gradient-secondary);
+        }
+        
+        .feature-item:nth-child(3) .feature-icon {
+            background: var(--gradient-accent);
+        }
+        
+        .feature-content h3 {
+            font-size: 22px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .feature-content p {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 120px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .team-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><path fill="%234361EE" fill-opacity="0.03" d="M75,0C33.6,0,0,33.6,0,75s33.6,75,75,75s75-33.6,75-75S116.4,0,75,0z M75,125c-27.6,0-50-22.4-50-50s22.4-50,50-50s50,22.4,50,50S102.6,125,75,125z"/></svg>');
+            background-size: 150px;
+            z-index: 0;
+            animation: bgMove 40s infinite linear;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 45px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+            position: relative;
+            animation: teamCardFloat 8s infinite ease-in-out;
+            animation-play-state: paused;
+        }
+        
+        @keyframes teamCardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            animation-play-state: running;
+        }
+        
+        .team-header {
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .team-card:nth-child(1) .team-header {
+            background: var(--gradient-primary);
+        }
+        
+        .team-card:nth-child(2) .team-header {
+            background: var(--gradient-secondary);
+        }
+        
+        .team-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            bottom: -80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 8px solid white;
+            animation: avatarFloat 6s infinite ease-in-out;
+        }
+        
+        @keyframes avatarFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .team-card:nth-child(1) .team-avatar {
+            color: var(--primary);
+        }
+        
+        .team-card:nth-child(2) .team-avatar {
+            color: var(--success);
+        }
+        
+        .team-body {
+            padding: 100px 35px 45px;
+            text-align: center;
+        }
+        
+        .team-name {
+            font-size: 26px;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .team-role {
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 25px;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: var(--gray-light);
+            animation: rolePulse 4s infinite;
+        }
+        
+        @keyframes rolePulse {
+            0%, 100% {
+                background: var(--gray-light);
+            }
+            50% {
+                background: rgba(233, 236, 239, 0.7);
+            }
+        }
+        
+        .team-card:nth-child(1) .team-role {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+        
+        .team-card:nth-child(2) .team-role {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+        
+        .team-bio {
+            color: var(--gray);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* Story Section */
+        .story-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .story-content h2 {
+            font-size: 48px;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+        
+        .story-quote {
+            font-size: 24px;
+            color: var(--dark);
+            font-style: italic;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            padding: 0 30px;
+            position: relative;
+            animation: quoteFadeIn 2s ease-out;
+        }
+        
+        @keyframes quoteFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .story-quote::before, .story-quote::after {
+            content: '"';
+            font-size: 60px;
+            color: var(--primary);
+            position: absolute;
+            opacity: 0.3;
+            animation: quoteMarks 3s infinite;
+        }
+        
+        @keyframes quoteMarks {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .story-quote::before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .story-quote::after {
+            bottom: -40px;
+            right: 0;
+        }
+        
+        .story-text {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        .story-highlight {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: var(--shadow);
+            border-left: 8px solid var(--accent);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            animation: highlightFloat 10s infinite ease-in-out;
+        }
+        
+        @keyframes highlightFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .story-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23F72585" fill-opacity="0.05"/></svg>');
+            background-size: 100px;
+            z-index: 0;
+            animation: bgMove 60s infinite linear;
+        }
+        
+        .story-highlight h4 {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .story-highlight p {
+            color: var(--gray);
+            font-size: 17px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Business Model Section */
+        .business-section {
+            padding: 120px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .business-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .tab-btn {
+            background: white;
+            border: 3px solid var(--gray-light);
+            color: var(--dark);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .tab-btn.active {
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.2);
+        }
+        
+        .tab-btn.active::before {
+            opacity: 1;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 320px;
+            margin: 50px 0;
+            gap: 40px;
+        }
+        
+        .chart-bar {
+            width: 80px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            transition: height 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--gradient-primary);
+            animation: chartBarPulse 3s infinite;
+        }
+        
+        @keyframes chartBarPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+        }
+        
+        .chart-bar.revenue-1 { background: var(--gradient-primary); }
+        .chart-bar.revenue-2 { background: var(--gradient-secondary); }
+        .chart-bar.revenue-3 { background: var(--gradient-accent); }
+        .chart-bar.revenue-4 { background: linear-gradient(135deg, #7209B7, #9D4EDD); }
+        .chart-bar.revenue-5 { background: linear-gradient(135deg, #6C757D, #ADB5BD); }
+        
+        .chart-bar-label {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 15px;
+            color: var(--gray);
+            text-align: center;
+            width: 120px;
+            font-weight: 600;
+        }
+        
+        .chart-bar-value {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 800;
+            color: var(--dark);
+            font-size: 20px;
+        }
+        
+        /* Funding Section */
+        .funding-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+            position: relative;
+        }
+        
+        .funding-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 70px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+            animation: fundingCardFloat 8s infinite ease-in-out;
+        }
+        
+        @keyframes fundingCardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .funding-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient-primary);
+        }
+        
+        .funding-target {
+            font-size: 68px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: fundingTargetPulse 3s infinite;
+        }
+        
+        @keyframes fundingTargetPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        
+        .funding-label {
+            color: var(--gray);
+            font-size: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .funding-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+        
+        .funding-item {
+            text-align: center;
+            padding: 30px;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            animation: fundingItemFloat 6s infinite ease-in-out;
+            animation-play-state: paused;
+        }
+        
+        @keyframes fundingItemFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .funding-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation-play-state: running;
+        }
+        
+        .funding-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .funding-purpose {
+            color: var(--gray);
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="%23FFFFFF" stroke-width="1" stroke-opacity="0.05"/></svg>');
+            background-size: 200px;
+            animation: bgMove 50s infinite linear;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-column h3 {
+            font-size: 26px;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 30px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 20px;
+            margin-top: 3px;
+        }
+        
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .product-content {
+                flex-direction: column;
+                gap: 70px;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-radius: 0 0 20px 20px;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 160px;
+                padding-bottom: 100px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .chart-container {
+                flex-direction: column;
+                height: auto;
+                align-items: center;
+                gap: 60px;
+            }
+            
+            .chart-bar {
+                width: 250px;
+                height: auto !important;
+            }
+            
+            .funding-card {
+                padding: 50px 30px;
+            }
+            
+            .funding-target {
+                font-size: 52px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+            
+            .metric-value {
+                font-size: 40px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .funding-target {
+                font-size: 44px;
+            }
+            
+            .funding-breakdown {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-text {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-icon-inner">
+                        <!-- DNA双螺旋结构 -->
+                        <div class="logo-dna-container">
+                            <div class="logo-dna-strand">
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-connector"></div>
+                            </div>
+                            <div class="logo-dna-strand second">
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-node"></div>
+                                <div class="dna-connector"></div>
+                            </div>
+                        </div>
+                        <!-- 神经网络元素 -->
+                        <div class="logo-neural-network">
+                            <div class="neural-node"></div>
+                            <div class="neural-node"></div>
+                            <div class="neural-node"></div>
+                            <div class="neural-node"></div>
+                            <div class="neural-connection"></div>
+                            <div class="neural-connection"></div>
+                            <div class="neural-connection"></div>
+                        </div>
+                        <!-- 医疗盾牌元素 -->
+                        <div class="logo-shield">
+                            <div class="shield-outer"></div>
+                            <div class="shield-inner"></div>
+                            <div class="shield-cross"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="logo-text">NeuroDetect</div>
+                    <div class="logo-tagline">Revolutionizing Parkinson's Early Screening</div>
+                </div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#product" class="nav-link">Product</a>
+                <a href="#metrics" class="nav-link">Advantages</a>
+                <a href="#team" class="nav-link">Team</a>
+                <a href="#story" class="nav-link">Story</a>
+                <a href="#business" class="nav-link">Business Model</a>
+                <a href="#funding" class="nav-link">Funding</a>
+                <a href="#contact" class="nav-cta">Contact Us</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-3"></div>
+            <div class="floating-element floating-element-4"></div>
+            <div class="floating-element floating-element-5"></div>
+        </div>
+        
+        <div class="data-flow" id="hero-data-flow"></div>
+        
+        <div class="particle-container" id="hero-particles"></div>
+        
+        <div class="molecular-animation" id="hero-molecules"></div>
+        
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-medal"></i> Conrad Challenge Innovation Project
+                </div>
+                <h1>Redefining Parkinson's Disease<br>Early Screening Standards</h1>
+                <p class="hero-subtitle">World's first non-invasive Parkinson's early screening solution based on peripheral blood methylation analysis</p>
+                <p class="hero-description">
+                    NeuroDetect has developed PD EarlyScreen Kit through cutting-edge AI algorithms and epigenetic research—a revolutionary screening tool with ≥85% accuracy and cost only 8% of traditional PET scans. We're committed to making early screening an accessible health right for everyone.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">≥85%</div>
+                        <div class="stat-label">Accuracy Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">¥120</div>
+                        <div class="stat-label">Cost Per Test</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">2 Years</div>
+                        <div class="stat-label">Early Diagnosis</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">500K+</div>
+                        <div class="stat-label">Annual Target</div>
+                    </div>
+                </div>
+                
+                <div class="hero-actions">
+                    <a href="#product" class="btn-primary">
+                        <i class="fas fa-play-circle"></i> Explore Our Innovation
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-calendar-alt"></i> Schedule a Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics-section" id="metrics">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-3"></div>
+        </div>
+        
+        <div class="particle-container" id="metrics-particles"></div>
+        
+        <div class="metrics-bg"></div>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Core Advantages</div>
+                <h2 class="section-title">Key Metrics Changing Industry Standards</h2>
+                <p class="section-description">Our innovation is reflected not only in technology but also in quantifiable clinical and commercial value</p>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="metric-value">≥85%</div>
+                    <div class="metric-label">Early Screening Accuracy</div>
+                    <div style="margin-top: 15px; font-size: 14px; color: var(--gray);">AUC 0.73, significantly better than early clinical diagnosis</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="metric-value">¥120</div>
+                    <div class="metric-label">Cost Per Test</div>
+                    <div style="margin-top: 15px; font-size: 14px; color: var(--gray);">Only 8% of PET scans, 15% of CSF tests</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="metric-value">500,000+</div>
+                    <div class="metric-label">Annual Screening Target</div>
+                    <div style="margin-top: 15px; font-size: 14px; color: var(--gray);">Covering 30% of top-tier hospitals nationwide</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="metric-value">30%</div>
+                    <div class="metric-label">Top Hospital Coverage Target</div>
+                    <div style="margin-top: 15px; font-size: 14px; color: var(--gray);">Covering 500 medical institutions within 3 years</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section" id="product">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-3"></div>
+            <div class="floating-element floating-element-5"></div>
+        </div>
+        
+        <div class="molecular-animation" id="product-molecules"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Innovation Product</div>
+                <h2 class="section-title">PD EarlyScreen Kit</h2>
+                <p class="section-description">Revolutionary Parkinson's early screening solution based on peripheral blood methylation analysis</p>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-visual">
+                    <div class="product-visual-main">
+                        <div class="product-visual-element">
+                            <div class="product-visual-icon">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div class="product-visual-title">PD EarlyScreen Kit</div>
+                            <div class="product-visual-subtitle">Non-Invasive · High Accuracy · Low Cost</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h2>Technologically Advanced, Clinically Validated</h2>
+                    <p>Our PD EarlyScreen Kit utilizes peripheral blood methylation analysis technology, detecting 10 key methylation sites related to Parkinson's pathology, combined with our proprietary AI algorithm model to generate accurate PD risk scores.</p>
+                    <p>The technology has been validated in a multicenter retrospective study involving 1,889 samples, achieving an AUC of 0.73, significantly better than early clinical diagnosis accuracy (approximately 53%).</p>
+                    
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Completely Non-Invasive</h3>
+                                <p>Only requires 5ml of peripheral blood, no lumbar puncture or radioactive scanning needed, with patient acceptance rates exceeding 95%.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Significant Cost Benefits</h3>
+                                <p>Testing costs only 8% of PET scans and 15% of CSF tests, making large-scale population screening feasible.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Fast and Efficient</h3>
+                                <p>From sample collection to result output takes only 3-5 working days, supporting efficient workflow for medical institutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="team-bg"></div>
+        
+        <div class="particle-container" id="team-particles"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Core Team</div>
+                <h2 class="section-title">Experienced, Complementary Expertise</h2>
+                <p class="section-description">Our team combines expertise in neuroscience, bioinformatics, and business management</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card animate-on-scroll">
+                    <div class="team-header">
+                        <div class="team-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                    </div>
+                    <div class="team-body">
+                        <h3 class="team-name">Wenhao Wu</h3>
+                        <div class="team-role">Technical Lead</div>
+                        <p class="team-bio">Specializes in neuroepigenetics research with extensive biomedical competition experience. Deeply understands the urgency of early screening due to his grandmother's Parkinson's diagnosis, responsible for methylation diagnostic model construction and optimization.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card animate-on-scroll">
+                    <div class="team-header">
+                        <div class="team-avatar">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="team-body">
+                        <h3 class="team-name">Tianyi Lu</h3>
+                        <div class="team-role">Business Lead</div>
+                        <p class="team-bio">Possesses systematic economics and management knowledge, awarded Grade Honor Roll. Responsible for commercialization planning, channel expansion, and partnership negotiations, focusing on transforming technological innovation into sustainable business models.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-4"></div>
+        </div>
+        
+        <div class="molecular-animation" id="story-molecules"></div>
+        
+        <div class="container">
+            <div class="story-content animate-on-scroll">
+                <h2>Our Innovation Story</h2>
+                <p class="story-quote">"When my grandmother suffered from missed early intervention opportunities for Parkinson's disease, I was determined to change this situation."</p>
+                
+                <p class="story-text">
+                    The technical lead Wenhao Wu's grandmother was diagnosed with Parkinson's disease in 2018, when symptoms were already quite noticeable, missing the optimal intervention window. This family experience made us deeply aware of the importance of early screening and also revealed the significant limitations of existing diagnostic methods.
+                </p>
+                
+                <p class="story-text">
+                    Meanwhile, our research found that China has over 3 million Parkinson's patients, and this number continues to grow rapidly with an aging population. However, existing early diagnosis methods are either highly invasive (such as cerebrospinal fluid testing with refusal rates exceeding 70%) or prohibitively expensive (such as PET scans costing over $1,500 per session), unable to meet large-scale screening needs.
+                </p>
+                
+                <div class="story-highlight">
+                    <h4>From Personal Pain Point to Societal Solution</h4>
+                    <p>Based on cutting-edge neuroepigenetics research, we discovered the strong correlation between peripheral blood DNA methylation and Parkinson's disease. After over two years of research, we screened 10 most predictive methylation sites from thousands of candidate markers, constructing the first Parkinson's early screening model suitable for the Chinese population.</p>
+                    <p>Our vision is to make Parkinson's early screening as common as blood pressure testing, becoming part of routine physical examinations for middle-aged and elderly individuals, advancing diagnosis time by an average of 2 years, significantly improving patients' quality of life and prognosis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model Section -->
+    <section class="business-section" id="business">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-3"></div>
+            <div class="floating-element floating-element-5"></div>
+        </div>
+        
+        <div class="particle-container" id="business-particles"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Business Model</div>
+                <h2 class="section-title">Sustainable Diversified Revenue Structure</h2>
+                <p class="section-description">"Product + Service + Technology Licensing" multi-dimensional business model ensuring long-term sustainable development</p>
+            </div>
+            
+            <div class="business-tabs">
+                <button class="tab-btn active" data-tab="revenue">Revenue Sources</button>
+                <button class="tab-btn" data-tab="cost">Cost Structure</button>
+                <button class="tab-btn" data-tab="market">Market Strategy</button>
+            </div>
+            
+            <div class="tab-content active" id="revenue">
+                <div class="chart-container" id="revenue-chart">
+                    <!-- Revenue chart will be generated via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="cost">
+                <div class="chart-container" id="cost-chart">
+                    <!-- Cost chart will be generated via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="market">
+                <div style="text-align: center; max-width: 850px; margin: 0 auto;">
+                    <h3 style="color: var(--primary); margin-bottom: 25px; font-size: 32px;">Market Entry Strategy</h3>
+                    <p style="color: var(--gray); margin-bottom: 35px; font-size: 18px; line-height: 1.8;">
+                        We adopt a "direct sales + distribution" dual-track strategy. The direct sales team focuses on establishing deep cooperation with the top 50 tertiary hospital neurology departments nationwide, while distribution partners with leading IVD distributors to quickly cover secondary hospitals and high-end physical examination centers.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 50px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 42px; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">50+</div>
+                            <div style="color: var(--gray); font-weight: 600;">Target Tertiary Hospitals</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 42px; font-weight: 800; background: var(--gradient-secondary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">100+</div>
+                            <div style="color: var(--gray); font-weight: 600;">Target Exam Centers</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 42px; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">3 Years</div>
+                            <div style="color: var(--gray); font-weight: 600;">Break-Even Target</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funding Section -->
+    <section class="funding-section" id="funding">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-4"></div>
+        </div>
+        
+        <div class="molecular-animation" id="funding-molecules"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Funding Needs</div>
+                <h2 class="section-title">Advancing the Project to the Next Phase</h2>
+                <p class="section-description">Seeking ¥1,000,000 seed funding for product iteration, market promotion, and clinical validation</p>
+            </div>
+            
+            <div class="funding-card animate-on-scroll">
+                <div class="funding-target">¥1,000,000</div>
+                <div class="funding-label">Seed Funding Target</div>
+                
+                <div class="funding-breakdown">
+                    <div class="funding-item">
+                        <div class="funding-amount">¥370,000</div>
+                        <div class="funding-purpose">Product Iteration & R&D</div>
+                        <div style="margin-top: 10px; font-size: 14px; color: var(--gray);">AI algorithm optimization and kit upgrades</div>
+                    </div>
+                    <div class="funding-item">
+                        <div class="funding-amount">¥280,000</div>
+                        <div class="funding-purpose">Marketing & Team Building</div>
+                        <div style="margin-top: 10px; font-size: 14px; color: var(--gray);">Conference participation and business team establishment</div>
+                    </div>
+                    <div class="funding-item">
+                        <div class="funding-amount">¥240,000</div>
+                        <div class="funding-purpose">Team Operations & Salaries</div>
+                        <div style="margin-top: 10px; font-size: 14px; color: var(--gray);">Annual compensation for 4 core members</div>
+                    </div>
+                    <div class="funding-item">
+                        <div class="funding-amount">¥110,000</div>
+                        <div class="funding-purpose">Medical Device Certification</div>
+                        <div style="margin-top: 10px; font-size: 14px; color: var(--gray);">NMPA Class II certification and related fees</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NeuroDetect</h3>
+                    <p>We are committed to revolutionizing Parkinson's early screening paradigms through technological innovation, providing accessible and affordable solutions for millions of patients worldwide.</p>
+                    <div style="margin-top: 35px;">
+                        <a href="#" class="btn-primary" style="padding: 16px 32px; font-size: 16px;" onclick="downloadBusinessPlan()">
+                            <i class="fas fa-download"></i> Download Business Plan
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Shanghai, China</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>12345678910</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@neurodetect.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <span>www.neurodetect.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Partnerships</h3>
+                    <p>We have established cooperation with over 20 tertiary hospital neurology departments and reached partnership intentions with leading IVD distributors to jointly promote Parkinson's early screening.</p>
+                    <div style="margin-top: 35px;">
+                        <a href="#" class="btn-secondary" style="padding: 16px 32px; font-size: 16px; color: white; border-color: rgba(255, 255, 255, 0.3);" onclick="showPartners()">
+                            <i class="fas fa-handshake"></i> Become a Partner
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 NeuroDetect. All rights reserved. | Conrad Challenge Innovation Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // Trigger animations when elements enter viewport
+                const animateElements = document.querySelectorAll('.animate-on-scroll');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                animateElements.forEach(element => {
+                    observer.observe(element);
+                });
+                
+                // Update active nav links
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Initialize charts
+            initCharts();
+            
+            // Create data flow animation
+            createDataFlow();
+            
+            // Create particle animations
+            createParticles('hero-particles', 30);
+            createParticles('metrics-particles', 20);
+            createParticles('team-particles', 15);
+            createParticles('business-particles', 20);
+            
+            // Create molecular animations
+            createMolecules('hero-molecules', 5);
+            createMolecules('product-molecules', 3);
+            createMolecules('story-molecules', 4);
+            createMolecules('funding-molecules', 3);
+            
+            // Tab switching functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update button states
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update content display
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.getAttribute('id') === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    // Reinitialize charts if on chart tabs
+                    if (tabId === 'revenue' || tabId === 'cost') {
+                        setTimeout(() => {
+                            if (tabId === 'revenue') {
+                                createRevenueChart();
+                            } else {
+                                createCostChart();
+                            }
+                        }, 100);
+                    }
+                });
+            });
+            
+            // Mobile menu
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu
+                        if (window.innerWidth <= 768) {
+                            navLinks.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Trigger initial scroll check
+            window.dispatchEvent(new Event('scroll'));
+        });
+        
+        // Create data flow animation
+        function createDataFlow() {
+            const heroSection = document.getElementById('hero-data-flow');
+            if (!heroSection) return;
+            
+            for (let i = 0; i < 25; i++) {
+                const node = document.createElement('div');
+                node.className = 'data-node';
+                
+                // Random position
+                const left = Math.random() * 100;
+                const delay = Math.random() * 8;
+                const duration = 5 + Math.random() * 5;
+                
+                node.style.left = `${left}%`;
+                node.style.animationDelay = `${delay}s`;
+                node.style.animationDuration = `${duration}s`;
+                
+                // Random color
+                const colors = ['#4361EE', '#7209B7', '#4CC9F0', '#F72585'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                node.style.background = randomColor;
+                
+                heroSection.appendChild(node);
+            }
+        }
+        
+        // Create particle animation
+        function createParticles(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = 5 + Math.random() * 20;
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random animation delay
+                const delay = Math.random() * 20;
+                const duration = 15 + Math.random() * 15;
+                
+                // Random color
+                const colors = ['#4361EE', '#7209B7', '#4CC9F0', '#F72585', '#F9C74F'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.background = randomColor;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Create molecular animation
+        function createMolecules(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            for (let i = 0; i < count; i++) {
+                const molecule = document.createElement('div');
+                molecule.className = 'molecule';
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random animation delay and duration
+                const delay = Math.random() * 25;
+                const duration = 20 + Math.random() * 20;
+                
+                molecule.style.left = `${left}%`;
+                molecule.style.top = `${top}%`;
+                molecule.style.animationDelay = `${delay}s`;
+                molecule.style.animationDuration = `${duration}s`;
+                
+                // Create atoms
+                const atomCount = 3 + Math.floor(Math.random() * 4);
+                for (let j = 0; j < atomCount; j++) {
+                    const atom = document.createElement('div');
+                    atom.className = 'atom';
+                    
+                    const atomSize = 10 + Math.random() * 20;
+                    const atomX = Math.random() * 80 - 40;
+                    const atomY = Math.random() * 80 - 40;
+                    
+                    atom.style.width = `${atomSize}px`;
+                    atom.style.height = `${atomSize}px`;
+                    atom.style.left = `calc(50% + ${atomX}px)`;
+                    atom.style.top = `calc(50% + ${atomY}px)`;
+                    
+                    // Random atom color
+                    const colors = ['#4361EE', '#7209B7', '#4CC9F0', '#F72585'];
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    atom.style.background = randomColor;
+                    
+                    molecule.appendChild(atom);
+                    
+                    // Create bonds between atoms
+                    if (j > 0) {
+                        const bond = document.createElement('div');
+                        bond.className = 'bond';
+                        
+                        // Calculate bond properties
+                        const prevAtom = molecule.children[j-1];
+                        const prevX = parseFloat(prevAtom.style.left) - 50;
+                        const prevY = parseFloat(prevAtom.style.top) - 50;
+                        
+                        const dx = atomX - prevX;
+                        const dy = atomY - prevY;
+                        const distance = Math.sqrt(dx*dx + dy*dy);
+                        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                        
+                        bond.style.width = `${distance}px`;
+                        bond.style.left = `calc(50% + ${prevX}px + ${atomSize/2}px)`;
+                        bond.style.top = `calc(50% + ${prevY}px + ${atomSize/2}px)`;
+                        bond.style.transform = `rotate(${angle}deg)`;
+                        
+                        molecule.appendChild(bond);
+                    }
+                }
+                
+                container.appendChild(molecule);
+            }
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            createRevenueChart();
+            createCostChart();
+        }
+        
+        // Create revenue sources chart
+        function createRevenueChart() {
+            const container = document.getElementById('revenue-chart');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const revenueData = [
+                { label: "Kit Sales", value: 40, colorClass: "revenue-1" },
+                { label: "Custom Services", value: 30, colorClass: "revenue-2" },
+                { label: "Data Licensing", value: 15, colorClass: "revenue-3" },
+                { label: "Patent Licensing", value: 10, colorClass: "revenue-4" },
+                { label: "Other", value: 5, colorClass: "revenue-5" }
+            ];
+            
+            revenueData.forEach(item => {
+                const barHeight = (item.value / 40) * 250; // Max height 250px
+                const bar = document.createElement('div');
+                bar.className = `chart-bar ${item.colorClass}`;
+                bar.style.height = '0px';
+                bar.innerHTML = `
+                    <div class="chart-bar-value">${item.value}%</div>
+                    <div class="chart-bar-label">${item.label}</div>
+                `;
+                container.appendChild(bar);
+                
+                // Add animation delay
+                setTimeout(() => {
+                    bar.style.height = barHeight + 'px';
+                }, 300);
+            });
+        }
+        
+        // Create cost structure chart
+        function createCostChart() {
+            const container = document.getElementById('cost-chart');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const costData = [
+                { label: "R&D Iteration", value: 60, colorClass: "revenue-1" },
+                { label: "Production", value: 20, colorClass: "revenue-2" },
+                { label: "Marketing", value: 10, colorClass: "revenue-3" },
+                { label: "Certification", value: 10, colorClass: "revenue-4" }
+            ];
+            
+            costData.forEach(item => {
+                const barHeight = (item.value / 60) * 250; // Max height 250px
+                const bar = document.createElement('div');
+                bar.className = `chart-bar ${item.colorClass}`;
+                bar.style.height = '0px';
+                bar.innerHTML = `
+                    <div class="chart-bar-value">${item.value}%</div>
+                    <div class="chart-bar-label">${item.label}</div>
+                `;
+                container.appendChild(bar);
+                
+                // Add animation delay
+                setTimeout(() => {
+                    bar.style.height = barHeight + 'px';
+                }, 300);
+            });
+        }
+        
+        // Interactive functions
+        function downloadBusinessPlan() {
+            alert("Business plan download link has been sent to your email!\n\nFor immediate access, please contact: contact@neurodetect.com");
+        }
+        
+        function showPartners() {
+            alert("Main Partners:\n\n1. Clinical Partner Hospitals (20+):\n   - XX Provincial People's Hospital Neurology Department\n   - XX University Affiliated First Hospital\n   - XX City Third Hospital\n   - ...\n\n2. Distribution Partners:\n   - XX Medical Equipment Co., Ltd.\n   - XX Biotechnology Distribution Network\n\n3. Academic Partner Institutions:\n   - Chinese Neuroscience Society\n   - XX University Biomedical Research Institute\n\nWe continuously seek cooperation with more medical institutions to jointly promote Parkinson's early screening.");
+        }
+        
+        // Responsive adjustments
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
